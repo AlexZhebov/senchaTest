@@ -17,19 +17,47 @@ Ext.define('AppName.view.main.Config', {
                     }
             },
             {
-                xtype: 'panel',
+                xtype: 'container',
                 title: 'Добавление персоны',
-                height: 200,
+                height: 500,
                 items: [
                     {
                         xtype: 'textfield',
-                        name: 'name',
-                        fieldLabel: 'Name',
+                        name: 'firstname',
+                        margin: 10,
+                        fieldLabel: 'Имя',
+                        allowBlank: false  // requires a non-empty value
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'lastname',
+                        margin: 10,
+                        fieldLabel: 'Фамилия',
+                        allowBlank: false  // requires a non-empty value
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'city',
+                        margin: 10,
+                        fieldLabel: 'Город',
+                        allowBlank: false  // requires a non-empty value
+                    },
+                    {
+                        xtype: 'datefield',
+                        name: 'datar',
+                        margin: 10,
+                        fieldLabel: 'Дата рождения',
                         allowBlank: false  // requires a non-empty value
                     },
                     {
                         xtype: 'button',
-                        text: 'Кнопка'
+                        margin: 10,
+                        text: 'Добавить'
+                    },
+                    {
+                        xtype: 'button',
+                        margin: 10,
+                        text: 'Отмена'
                     }
                 ]
             }
