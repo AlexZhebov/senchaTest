@@ -91,11 +91,11 @@ Ext.define('AppName.view.main.Main', {
             xtype: 'personslist',
         }]
     }, {
-        title: 'Пользователи',
+        title: 'Справочник городов',
         iconCls: 'fa-user',
-        bind: {
-            html: '{page_text_users}'
-        }
+        items: [{
+            xtype: 'sprCity',
+        }]
     }, {
         title: 'Группы',
         iconCls: 'fa-users',

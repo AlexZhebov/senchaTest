@@ -8,7 +8,7 @@ Ext.define('AppName.view.main.Persons', {
     items: [
         {
             extend: 'Ext.grid.Panel',
-            xtype: 'personslist2',
+            xtype: 'gridpanel',
             id: 'PersonGrid',
 
             requires: [
