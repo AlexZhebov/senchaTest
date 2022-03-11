@@ -48,10 +48,25 @@ Ext.define('AppName.view.main.sprCityEditForm', {
                                     });
                                 }
                                 if (city.isValid()) {
-                                    city.save();
+                                    city.save({
+
+                                        success: function (rec, op) {
+                                            alert('success');
+                                        },
+                                        failure: function (rec, op) {
+                                            console.log(rec);
+                                            console.log(op);
+                                            alert('failure');
+                                        }
+                                    });
                                     store.load();
                                     this.up('window').close();
                                 } else {
+                                    var errors = city.validate();
+                                    errors.each (function(error) {
+                                        console.log(error);
+                                        alert("Ошибка: " + error.field + ": " + error.message);
+                                    })
                                     alert("Заполните все поля!");
                                 }
 

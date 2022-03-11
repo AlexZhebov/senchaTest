@@ -24,7 +24,12 @@ Ext.define('AppName.model.sprCity', {
         },
         listeners: {
             exception: function(proxy, response, operation, eOpts) {
-                alert('exception');
+                // событие возникает при любом обращении
+                //console.log(proxy);
+                //console.log(response);
+                //console.log(operation);
+                //console.log(eOpts);
+                //alert('exception');
             }
         },
         api: {
