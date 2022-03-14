@@ -5,7 +5,7 @@ Ext.define('AppName.model.sprCity', {
         {name: 'cityname', type: 'string'}
     ],
     validators: {
-        cityname: {type: 'length', min: 2, message: 'Заполните название города'}
+        cityname: {type: 'presence', message: 'Заполните название города'}
     },
     proxy: {
         type: 'ajax',

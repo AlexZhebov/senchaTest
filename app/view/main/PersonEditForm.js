@@ -98,7 +98,7 @@ Ext.define('AppName.view.main.PersonEditForm', {
                                     store.load();
                                     this.up('window').close();
                                 } else {
-                                    var errors = city.validate();
+                                    var errors = person.validate();
                                     errors.each (function(error) {
                                         console.log(error);
                                         alert("Ошибка: " + error.field + ": " + error.getMessage());
