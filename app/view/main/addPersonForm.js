@@ -25,11 +25,17 @@ Ext.define('AppName.view.main.addPersonForm', {
                         allowBlank: false  // requires a non-empty value
                     },
                     {
-                        xtype: 'textfield',
-                        name: 'city',
-                        id: 'city',
+                        xtype: 'combobox',
+                        fieldLabel: 'Выберите город',
+                        name: 'id_city',
+                        store: {
+                            type: 'sprCity'
+                        },
+                        valueField: 'id',
+                        displayField: 'cityname',
+                        //name: 'city',
+                        //id: 'city',
                         margin: 10,
-                        fieldLabel: 'Город',
                         allowBlank: false  // requires a non-empty value
                     },
                     {

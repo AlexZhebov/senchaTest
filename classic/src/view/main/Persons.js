@@ -4,6 +4,9 @@
 Ext.define('AppName.view.main.Persons', {
     extend: 'Ext.panel.Panel',
     xtype: 'personslist',
+    requires: [
+        'AppName.view.main.PersonEditForm',
+    ],
 
     items: [
         {
@@ -53,8 +56,46 @@ Ext.define('AppName.view.main.Persons', {
                 },
                 {
                     xtype:'actioncolumn',
-                    width:40,
-                    items:[{
+                    width: 100,
+                    text: 'Действия',
+                    items:[
+                        {
+                            icon: 'edit.png',
+                            handler:function (grid, rowIndex, colIndex) {
+
+                                var selectionModel = grid.getSelectionModel(), record;
+                                selectionModel.select(rowIndex);
+                                record = selectionModel.getSelection()[0];
+
+                                var window = Ext.create('Ext.window.Window', {
+                                    title: 'Форма редактирования персоны',
+                                    width: 310,
+                                    height: 300,
+                                    modal: true,
+                                    items:[{
+                                        xtype: 'PersonEditForm',
+
+                                    }]
+                                });
+                                window.show();
+
+                                var firstname = Ext.getCmp('firstname');
+                                firstname.setValue(record.get('firstName'));
+                                var lastname = Ext.getCmp('lastname');
+                                lastname.setValue(record.get('lastName'));
+
+                                if (!(record.get('id_city') === "0")) {
+                                    var idcity = Ext.getCmp('id_city');
+                                    idcity.setValue(record.get('id_city'));
+                                }
+
+                                var dataR = Ext.getCmp('dataR');
+                                dataR.setValue(record.get('dataR'));
+
+                                var idperson = Ext.getCmp('idperson');
+                                idperson.setValue(record.get('id'));
+                            }
+                        },{
                         icon: 'delete.png',
                         handler:function (grid, rowIndex, colIndex) {
 
@@ -88,9 +129,10 @@ Ext.define('AppName.view.main.Persons', {
                         var window = Ext.create('Ext.window.Window', {
                             title: 'Форма добавления персоны',
                             width: 310,
-                            height: 280,
+                            height: 300,
+                            modal: true,
                             items:[{
-                                xtype: 'addPersonForm',
+                                xtype: 'PersonEditForm',
 
                             }]
                         });

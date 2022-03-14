@@ -1,2 +1,2 @@
 // @tag full-page
-// @require c:\tests\senchaTest\app.js
+// @require K:\tests\senchaTest\app.js
