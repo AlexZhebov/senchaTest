@@ -51,12 +51,14 @@ Ext.define('AppName.view.main.sprCityEditForm', {
                                     city.save({
 
                                         success: function (rec, op) {
-                                            alert('success');
+                                            //console.log(rec);
+                                            //console.log(op);
+                                            //alert(rec.data["insert_id"]);
                                         },
                                         failure: function (rec, op) {
-                                            console.log(rec);
-                                            console.log(op);
-                                            alert('failure');
+                                            //console.log(rec);
+                                            //console.log(op);
+                                            alert('Ошибка');
                                         }
                                     });
                                     store.load();
@@ -65,7 +67,7 @@ Ext.define('AppName.view.main.sprCityEditForm', {
                                     var errors = city.validate();
                                     errors.each (function(error) {
                                         console.log(error);
-                                        alert("Ошибка: " + error.field + ": " + error.message);
+                                        alert("Ошибка: " + error.field + ": " + error.getMessage());
                                     })
                                     alert("Заполните все поля!");
                                 }

@@ -12,6 +12,7 @@ $include-appname-view-main-main: dynamic(true);;
 $include-appname-view-main-maincontroller: dynamic(true);;
 $include-appname-view-main-mainmodel: dynamic(true);;
 $include-appname-view-main-persons: dynamic(true);;
+$include-appname-view-main-persons2: dynamic(true);;
 $include-appname-view-main-addpersonform: dynamic(true);;
 $include-appname-view-main-sprcity: dynamic(true);;
 $include-appname-view-main-sprcityeditform: dynamic(true);;
