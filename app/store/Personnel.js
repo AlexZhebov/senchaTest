@@ -8,7 +8,8 @@ Ext.define('AppName.store.Personnel', {
     model: 'AppName.model.Personnel',
 
     autoLoad: true,
-    autoSync: true
+    autoSync: true,
+    pageSize: 10
 
 });
 

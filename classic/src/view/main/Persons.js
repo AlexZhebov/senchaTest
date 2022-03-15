@@ -149,16 +149,10 @@ Ext.define('AppName.view.main.Persons', {
                             }
                         }]
                 }
-            ]
-        },
-        {
-            xtype: 'button',
-            text: 'Добавить запись в таблицу',
-            margin: 10,
-            listeners: {
-                click: {
-                    fn: addPerson
-                }
+            ],
+            bbar: {
+                xtype: 'pagingtoolbar',
+                displayInfo: true
             }
         }
     ]
