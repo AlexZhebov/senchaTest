@@ -10,6 +10,58 @@ Ext.define('AppName.view.main.Persons', {
 
     items: [
         {
+            extend: 'Ext.toolbar.Toolbar',
+            xtype: 'toolbar',
+            dock: 'top',
+            items: [
+                {
+                    icon: 'add24.png',
+                    padding: 0,
+                    width: 32,
+                    height: 32,
+                    tooltip: 'Создать новую запись',
+                    handler: addPerson
+                },
+                {
+                    icon: 'edit24.png',
+                    padding: 0,
+                    width: 32,
+                    height: 32,
+                    tooltip: 'Редактировать запись',
+                    handler: editPerson
+                },
+                {
+                    icon: 'delete24.png',
+                    padding: 0,
+                    width: 32,
+                    height: 32,
+                    tooltip: 'Удалить запись',
+                    handler: deletePerson
+                },
+                '-',
+                {
+                    icon: 'refresh24.png',
+                    padding: 0,
+                    width: 32,
+                    height: 32,
+                    tooltip: 'Обновить записи',
+                    handler: function () {refreshPerson();}
+                },
+                '-',
+                {
+                    xtype    : 'textfield',
+                    name     : 'findPerson',
+                    emptyText: 'Введите текст поиска'
+                },
+                {
+                    text: 'Найти',
+                    height: 32,
+                    tooltip: 'Выполнить поискы',
+                    handler: function () {alert('Функция в разработке');}
+                }
+            ]
+        },
+        {
             extend: 'Ext.grid.Panel',
             xtype: 'gridpanel',
             id: 'PersonGrid',
@@ -88,20 +140,7 @@ Ext.define('AppName.view.main.Persons', {
             margin: 10,
             listeners: {
                 click: {
-                    fn: function () {
-                        //Handle click event
-                        var window = Ext.create('Ext.window.Window', {
-                            title: 'Форма добавления персоны',
-                            width: 310,
-                            height: 300,
-                            modal: true,
-                            items:[{
-                                xtype: 'PersonEditForm',
-
-                            }]
-                        });
-                        window.show();
-                    }
+                    fn: addPerson
                 }
             }
         }
@@ -150,7 +189,7 @@ mnuPersonContext = new Ext.menu.Menu({
 function refreshPerson() {
     var store= Ext.getCmp('PersonGrid').getStore();
     store.load();
-}
+};
 
 /**
  * Функция удаления персоны
@@ -162,17 +201,22 @@ function deletePerson() {
     selectionModel.select(grid.getActiveCounter);
     record = selectionModel.getSelection()[0];
 
-    let questionText = "\"" + record.get('firstName') + " " + record.get('lastName') + " (город: " + record.get('city') + ")\"";
+    if (record === undefined) {
+        Ext.Msg.alert('Внимание!', 'Выберите строку для удаления', Ext.emptyFn);
+    } else {
+        let questionText = "\"" + record.get('firstName') + " " + record.get('lastName') + " (город: " + record.get('city') + ")\"";
 
-    var abc = Ext.Msg.confirm('Запрос на удаление', 'Вы действительно хотите удалить запись ' + questionText + '?', function(e)
-        {
-            if(e == 'yes')
+        var abc = Ext.Msg.confirm('Запрос на удаление', 'Вы действительно хотите удалить запись ' + questionText + '?', function(e)
             {
-                grid.getStore().removeAt(rowIndex);
+                if(e == 'yes')
+                {
+                    grid.getStore().removeAt(rowIndex);
+                }
             }
-        }
-    );
-}
+        );
+    }
+
+};
 
 /**
  * Функция редактирования персоны
@@ -180,12 +224,53 @@ function deletePerson() {
 function editPerson() {
 
     var grid= Ext.getCmp('PersonGrid');
+
     var selectionModel = grid.getSelectionModel(), record;
     selectionModel.select(grid.getActiveCounter);
     record = selectionModel.getSelection()[0];
 
+    if (record === undefined) {
+        Ext.Msg.alert('Внимание!', 'Выберите строку для редактирования', Ext.emptyFn);
+        //alert('Выберите строку');
+    } else {
+        var window = Ext.create('Ext.window.Window', {
+            title: 'Форма редактирования персоны',
+            width: 310,
+            height: 300,
+            modal: true,
+            items:[{
+                xtype: 'PersonEditForm',
+
+            }]
+        });
+        window.show();
+
+        var firstname = Ext.getCmp('firstname');
+        firstname.setValue(record.get('firstName'));
+        var lastname = Ext.getCmp('lastname');
+        lastname.setValue(record.get('lastName'));
+
+        if (!(record.get('id_city') === "0")) {
+            var idcity = Ext.getCmp('id_city');
+            idcity.setValue(record.get('id_city'));
+        }
+
+        var dataR = Ext.getCmp('dataR');
+        dataR.setValue(record.get('dataR'));
+
+        var idperson = Ext.getCmp('idperson');
+        idperson.setValue(record.get('id'));
+    }
+
+};
+
+/**
+ * Функция добавления персоны
+ */
+function addPerson() {
+    //Handle click event
     var window = Ext.create('Ext.window.Window', {
-        title: 'Форма редактирования персоны',
+        title: 'Форма добавления персоны',
         width: 310,
         height: 300,
         modal: true,
@@ -195,20 +280,4 @@ function editPerson() {
         }]
     });
     window.show();
-
-    var firstname = Ext.getCmp('firstname');
-    firstname.setValue(record.get('firstName'));
-    var lastname = Ext.getCmp('lastname');
-    lastname.setValue(record.get('lastName'));
-
-    if (!(record.get('id_city') === "0")) {
-        var idcity = Ext.getCmp('id_city');
-        idcity.setValue(record.get('id_city'));
-    }
-
-    var dataR = Ext.getCmp('dataR');
-    dataR.setValue(record.get('dataR'));
-
-    var idperson = Ext.getCmp('idperson');
-    idperson.setValue(record.get('id'));
-}
+};

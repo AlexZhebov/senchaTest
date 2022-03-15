@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'AppMyName' );
-$image-search-path: 'c:/tests/senchaTest/build/development/AppMyName/classic/resources';
+$image-search-path: 'K:/tests/senchaTest/build/development/AppMyName/classic/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-appname-application: dynamic(true);;
 $include-appname-model-personnel: dynamic(true);;
@@ -13,7 +13,6 @@ $include-appname-view-main-maincontroller: dynamic(true);;
 $include-appname-view-main-mainmodel: dynamic(true);;
 $include-appname-view-main-personeditform: dynamic(true);;
 $include-appname-view-main-persons: dynamic(true);;
-$include-appname-view-main-persons2: dynamic(true);;
 $include-appname-view-main-addpersonform: dynamic(true);;
 $include-appname-view-main-sprcity: dynamic(true);;
 $include-appname-view-main-sprcityeditform: dynamic(true);;
