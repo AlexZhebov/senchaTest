@@ -18,6 +18,7 @@ Ext.define('AppName.view.main.Persons', {
                     icon: 'add24.png',
                     padding: 0,
                     width: 32,
+                    scale: 'large',
                     height: 32,
                     tooltip: 'Создать новую запись',
                     handler: addPerson
@@ -25,6 +26,7 @@ Ext.define('AppName.view.main.Persons', {
                 {
                     icon: 'edit24.png',
                     padding: 0,
+                    scale: 'large',
                     width: 32,
                     height: 32,
                     tooltip: 'Редактировать запись',
@@ -33,6 +35,7 @@ Ext.define('AppName.view.main.Persons', {
                 {
                     icon: 'delete24.png',
                     padding: 0,
+                    scale: 'large',
                     width: 32,
                     height: 32,
                     tooltip: 'Удалить запись',
@@ -42,6 +45,7 @@ Ext.define('AppName.view.main.Persons', {
                 {
                     icon: 'refresh24.png',
                     padding: 0,
+                    scale: 'large',
                     width: 32,
                     height: 32,
                     tooltip: 'Обновить записи',
@@ -51,13 +55,26 @@ Ext.define('AppName.view.main.Persons', {
                 {
                     xtype    : 'textfield',
                     name     : 'findPerson',
+                    id: 'findPersonText',
                     emptyText: 'Введите текст поиска'
                 },
                 {
                     text: 'Найти',
+                    icon: 'find24.png',
+                    scale: 'large',
                     height: 32,
-                    tooltip: 'Выполнить поискы',
-                    handler: function () {alert('Функция в разработке');}
+                    padding: '5 0 0 5',
+                    style: {
+                        'font-size': '36px'
+                    },
+                    tooltip: 'Выполнить поиск',
+                    handler: findPerson
+                },
+                {
+                    text: 'Сброс',
+                    height: 32,
+                    tooltip: 'Сброс поиска',
+                    handler: clearfindPerson
                 }
             ]
         },
@@ -187,10 +204,46 @@ mnuPersonContext = new Ext.menu.Menu({
  * Функция обновления
  */
 function refreshPerson() {
-    var store= Ext.getCmp('PersonGrid').getStore();
-    store.load();
+    var model = Ext.create('AppName.model.Personnel');
+
+    //model.getProxy().api.read="http://localhost/showdb?findtext=" + Ext.getCmp('findPersonText').getValue();
+
+    model.load();
 };
 
+/**
+ * Функция обработки кнопки поиск
+ */
+function findPerson() {
+
+    // первый способ добавления параметра
+    //var model = Ext.create('AppName.model.Personnel');
+    //model.getProxy().api.read="http://localhost/showdb?findtext=" + Ext.getCmp('findPersonText').getValue();
+    //model.load();
+    var grid= Ext.getCmp('PersonGrid').getStore();
+
+    var findtext = Ext.getCmp('findPersonText').getValue();
+    var proxy = grid.getProxy();
+    proxy.setExtraParams({
+        findtext : findtext
+    });
+
+    grid.load();
+};
+
+/**
+ * Функция обработки кнопки поиск
+ */
+function clearfindPerson() {
+    Ext.getCmp('findPersonText').setValue('');
+    var grid= Ext.getCmp('PersonGrid').getStore();
+    var findtext = Ext.getCmp('findPersonText').getValue();
+    var proxy = grid.getProxy();
+    proxy.setExtraParams({
+        findtext : findtext
+    });
+    grid.load();
+};
 /**
  * Функция удаления персоны
  */
