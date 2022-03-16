@@ -15,7 +15,9 @@ Ext.define('AppName.model.Personnel', {
         type: 'ajax',
         url: 'http://localhost/showdb',
         reader: {
-            type: 'json'
+            type: 'json',
+            rootProperty: 'persons',
+            totalProperty: 'total'
         },
         writer: {
             type: 'json',

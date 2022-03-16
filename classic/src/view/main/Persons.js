@@ -152,7 +152,22 @@ Ext.define('AppName.view.main.Persons', {
             ],
             bbar: {
                 xtype: 'pagingtoolbar',
-                displayInfo: true
+                displayInfo: true,
+                beforePageText: 'Страница',
+                afterPageText: 'из {0}',
+                displayMsg: 'список персон {0} - {1} из {2}',
+                emptyMsg: 'Отсутствуют записи',
+                prevText: 'предыдущая страница',
+                nextText: 'следующая страница',
+                listeners: {
+                    beforerender : function() {
+                        this.child('#refresh').hide();
+                        //this.child('#next').tooltip = 'следующая страница';
+                        //this.child('#prev').tooltip = 'предыдущая страница';
+                        this.child('#first').hide();
+                        this.child('#last').hide();
+                    }
+                }
             }
         }
     ]
@@ -198,11 +213,13 @@ mnuPersonContext = new Ext.menu.Menu({
  * Функция обновления
  */
 function refreshPerson() {
-    var model = Ext.create('AppName.model.Personnel');
+    //var model = Ext.create('AppName.model.Personnel');
 
     //model.getProxy().api.read="http://localhost/showdb?findtext=" + Ext.getCmp('findPersonText').getValue();
 
-    model.load();
+    //model.load();
+    var grid= Ext.getCmp('PersonGrid').getStore();
+    grid.load();
 };
 
 /**

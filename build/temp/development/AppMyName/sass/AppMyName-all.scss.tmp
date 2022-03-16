@@ -1,5 +1,5 @@
 $app-name:  dynamic( 'AppMyName' );
-$image-search-path: 'c:/tests/senchaTest/build/development/AppMyName/classic/resources';
+$image-search-path: 'K:/tests/senchaTest/build/development/AppMyName/classic/resources';
 $theme-name:  dynamic( 'theme-triton' );
 $include-appname-application: dynamic(true);;
 $include-appname-model-personnel: dynamic(true);;
